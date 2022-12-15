@@ -21,6 +21,7 @@ setup(
         "casanova>=0.19.2,<0.20",
         "colorama>=0.4.0",
         "playwright>=1.28.0",
+        "tqdm>=4.60.0",
     ],
     zip_safe=True,
 )

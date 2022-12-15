@@ -19,6 +19,7 @@ from casanova.utils import CsvCellIO
 from argparse import ArgumentParser
 from playwright.sync_api import Error as PlaywrightError
 
+from screenshot.cli.utils import LoadingBar
 from screenshot.browser import BrowserContext
 from screenshot.__version__ import __version__
 from screenshot.exceptions import InvalidArgumentError
@@ -71,9 +72,12 @@ def main():
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
+    loading_bar = LoadingBar("Retrieving screenshots", unit="url")
+
     with BrowserContext() as browser_screenshot:
 
         for row, url in enricher.cells(column, with_rows=True):
+            loading_bar.update()
 
             try:
                 name_screenshot_file = browser_screenshot.screenshot_url(url, output_dir)
@@ -81,7 +85,7 @@ def main():
             except PlaywrightError as e:
                 if "Protocol error (Page.navigate): Cannot navigate to invalid URL" not in e.message:
                     raise e
-                print("Cannot navigate to url: %s" % url, file=sys.stderr)
+                loading_bar.print("Cannot navigate to URL: %s" % url)
 
 
 if __name__ == "__main__":
