@@ -8,4 +8,4 @@ wheel
 # Dependencies
 casanova==0.19.2
 colorama==0.4.4
-playwright>=1.27
+playwright>=1.28.0
