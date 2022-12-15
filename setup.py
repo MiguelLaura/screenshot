@@ -6,7 +6,7 @@ with open("./README.md", "r") as f:
 setup(
     name="screenshot",
     version="0.1.0",
-    description="A python library to take screenshots of web pages from list of urls.",
+    description="A python tool to take screenshots of web pages from list of urls.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="http://github.com/MiguelLaura/screenshot",
