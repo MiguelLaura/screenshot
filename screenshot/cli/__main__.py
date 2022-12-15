@@ -5,15 +5,21 @@
 #
 # CLI enpoint of the Screenshot library.
 #
+# To add:
+#   better error handling for args,
+#   better error handling for urls
+#
+import os
 import csv
 import sys
 import ctypes
 import casanova
-from tqdm import tqdm
 from argparse import ArgumentParser
+from playwright._impl._api_types import Error
 
-from screenshot.screenshot_urls import open_browser
+from screenshot.browser import BrowserContext
 from screenshot.__version__ import __version__
+from screenshot.exceptions import InvalidArgumentsError
 from screenshot.cli.constants import DEFAULT_PREBUFFER_BYTES
 
 
@@ -32,15 +38,51 @@ def main():
     cli_args = parser.parse_args()
 
     column = cli_args.column
-    file = cli_args.file
+    input_file = cli_args.file
     output_dir = cli_args.output_dir
-    output = cli_args.output
+    output = sys.stdout if not cli_args.output else open(cli_args.output, "w")
+
+    writer = csv.writer(output)
 
     if not column or not output_dir:
         parser.print_help()
+        return
 
-    else:
-        open_browser(column, file, output_dir, output)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    with BrowserContext() as browser_screenshot:
+
+        if not input_file:
+            name_screenshot_file = browser_screenshot.screenshot_url(column, output_dir)
+            writer.writerow(["url", "file_name"])
+            writer.writerow([column, name_screenshot_file])
+            return
+
+        if not os.path.exists(input_file):
+            raise InvalidArgumentsError(
+                'Could not find the "%s" CSV file.'
+                % input_file
+            )
+
+        with open(input_file, "r") as f:
+            reader = csv.DictReader(f)
+            writer.writerow(reader.fieldnames + ["file_name"])
+
+            for line in reader:
+                url = line.get(column)
+
+                if not url:
+                    raise InvalidArgumentsError(
+                        'Could not find the "%s" column containing the urls in the given CSV file.'
+                        % column
+                    )
+
+                try:
+                    name_screenshot_file = browser_screenshot.screenshot_url(url, output_dir)
+                    writer.writerow([line[i] for i in reader.fieldnames] + [name_screenshot_file])
+                except Error:
+                    print("Cannot navigate to url: %s" % url, file=sys.stderr)
 
 
 if __name__ == "__main__":
