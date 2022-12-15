@@ -1,5 +1,3 @@
-[![Build Status](https://github.com/MiguelLaura/screenshot/workflows/Tests/badge.svg)](https://github.com/MiguelLaura/screenshot/actions)
-
 # Screenshot
 
 A python tool to take screenshots of web pages from list of urls.
