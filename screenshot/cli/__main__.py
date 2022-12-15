@@ -24,6 +24,7 @@ from screenshot.__version__ import __version__
 from screenshot.exceptions import InvalidArgumentError
 from screenshot.cli.constants import DEFAULT_PREBUFFER_BYTES
 
+
 def ckeck_args(cli_args):
     column = cli_args.column
     input_file = cli_args.file
@@ -44,6 +45,7 @@ def ckeck_args(cli_args):
         )
 
     return column, input_file, output_dir, output
+
 
 def main():
 
