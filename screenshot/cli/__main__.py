@@ -8,6 +8,7 @@
 # To add:
 #   better error handling for args,
 #   better error handling for urls
+#   add --cookie (?)
 #
 import os
 import csv

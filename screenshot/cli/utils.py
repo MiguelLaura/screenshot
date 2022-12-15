@@ -55,4 +55,3 @@ class LoadingBar(tqdm):
 
     def update_errors(self):
         self.inc("errors")
-        self.update_stats()
