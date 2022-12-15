@@ -18,7 +18,7 @@ If you want to get the screenshot of a single url, you can use it this way:
 
 If you need to use it with an input file:
 
-```python -m screenshot.cli COLUMN --file INPUT-FILE OUTPUT-DIR```
+```python -m screenshot.cli COLUMN INPUT-FILE OUTPUT-DIR```
 
 To add an output file:
 

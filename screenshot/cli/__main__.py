@@ -83,6 +83,7 @@ def main():
                 name_screenshot_file = browser_screenshot.screenshot_url(url, output_dir)
                 enricher.writerow(row, [name_screenshot_file])
             except PlaywrightError as e:
+                loading_bar.update_errors()
                 if "Protocol error (Page.navigate): Cannot navigate to invalid URL" not in e.message:
                     raise e
                 loading_bar.print("Cannot navigate to URL: %s" % url)
