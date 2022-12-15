@@ -10,5 +10,5 @@ class ScreenshotError(Exception):
     pass
 
 
-class InvalidArgumentsError(ScreenshotError):
+class InvalidArgumentError(ScreenshotError):
     pass
