@@ -15,7 +15,7 @@ import sys
 import ctypes
 import casanova
 from argparse import ArgumentParser
-from playwright._impl._api_types import Error
+from playwright._impl._api_types import Error as PlaywrightError
 
 from screenshot.browser import BrowserContext
 from screenshot.__version__ import __version__
@@ -81,7 +81,9 @@ def main():
                 try:
                     name_screenshot_file = browser_screenshot.screenshot_url(url, output_dir)
                     writer.writerow([line[i] for i in reader.fieldnames] + [name_screenshot_file])
-                except Error:
+                except PlaywrightError as e:
+                    if "Protocol error (Page.navigate): Cannot navigate to invalid URL" not in e.message:
+                        raise e
                     print("Cannot navigate to url: %s" % url, file=sys.stderr)
 
 
