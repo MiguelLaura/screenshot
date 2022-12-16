@@ -6,7 +6,11 @@ twine
 wheel
 
 # Dependencies
+browser-cookie3==0.16.2
 casanova==0.19.2
 colorama==0.4.4
-playwright>=1.28.0
+minet==0.66.1
+playwright==1.28.0
+playwright_stealth==1.0.5
 tqdm==4.60.0
+ural==0.36.0
