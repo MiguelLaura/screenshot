@@ -9,7 +9,6 @@
 #   better error handling for urls
 #   add column in output file with errors
 #   resume option
-#   throttle
 #
 import sys
 import csv
