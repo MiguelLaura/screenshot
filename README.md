@@ -55,5 +55,5 @@ optional arguments:
                         'cookie'
   --cookies, -c         get cookies from chrome (won't work for Facebook, Twitter). Not compatible with 'authenticate_folder'
   --throttle THROTTLE, -t THROTTLE
-                        time to wait (s) between accessing to an other URL. Defaults to 0
+                        time to wait between accessing to an other URL. Defaults to 0
 ```
