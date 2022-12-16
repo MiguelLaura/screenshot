@@ -12,7 +12,8 @@ You also need to have `chrome` installed on your computer.
 
 ## Available commands
 
-```usage: python -m screenshot.cli [-h] [--version] {authenticate,take} ...
+```
+usage: python -m screenshot.cli [-h] [--version] {authenticate,take} ...
 
 positional arguments:
   {authenticate,take}
@@ -28,7 +29,8 @@ optional arguments:
 
 This command is useful if you want to use the `--authenticate-folder` argument of the `take` command. It will open a browser where you'll be able to log into some plateform you want to take screenshot of. Particularly, you need to do so for Facebook and Twitter. The folder may need to be updated after a certain amount of time, or if you shut down your computer.
 
-```usage: python -m screenshot.cli authenticate [-h] folder
+```
+usage: python -m screenshot.cli authenticate [-h] folder
 
 positional arguments:
   folder      folder name where the browser info must be saved
@@ -39,7 +41,8 @@ optional arguments:
 
 ## Take
 
-```usage: python -m screenshot.cli take [-h] [--output OUTPUT] [--authenticate_folder AUTHENTICATE_FOLDER] [--cookies] [--throttle] column [file] output_dir
+```
+usage: python -m screenshot.cli take [-h] [--output OUTPUT] [--authenticate_folder AUTHENTICATE_FOLDER] [--cookies] [--throttle] column [file] output_dir
 
 positional arguments:
   column                column where the urls are or a single url
