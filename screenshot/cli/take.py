@@ -6,6 +6,7 @@
 #
 import os
 import sys
+import time
 import casanova
 from io import StringIO
 from casanova.utils import CsvCellIO
@@ -25,6 +26,7 @@ def ckeck_args(cli_args):
     output = sys.stdout if not cli_args.output else open(cli_args.output, "w")
     authenticate_folder = cli_args.authenticate_folder
     cookies = cli_args.cookies
+    throttle = cli_args.throttle
 
     if cookies and authenticate_folder:
         raise InvalidArgumentError(
@@ -47,11 +49,11 @@ def ckeck_args(cli_args):
             % input_file
         )
 
-    return column, input_file, output_dir, output, authenticate_folder, cookies
+    return column, input_file, output_dir, output, authenticate_folder, cookies, throttle
 
 
 def take_command(cli_args):
-    column, input_file, output_dir, output, authenticate_folder, cookies = ckeck_args(cli_args)
+    column, input_file, output_dir, output, authenticate_folder, cookies, throttle = ckeck_args(cli_args)
 
     enricher = casanova.enricher(input_file, output, add=["file_name"])
 
@@ -72,6 +74,7 @@ def take_command(cli_args):
                     loading_bar.print(e.message)
 
                 loading_bar.update()
+                time.sleep(throttle)
 
     else:
         with BrowserContext(cookies) as browser_screenshot:
@@ -85,3 +88,4 @@ def take_command(cli_args):
                     loading_bar.print(e)
 
                 loading_bar.update()
+                time.sleep(throttle)

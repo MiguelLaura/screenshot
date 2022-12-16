@@ -26,7 +26,7 @@ optional arguments:
 
 ## Authenticate
 
-This command is useful if you want to use the `--authenticate-folder` argument of the `take` command. It will open a browser where you'll be able to log into some plateform you want to take screenshot of. Particularly, you need to do so for Facebook and Twitter.
+This command is useful if you want to use the `--authenticate-folder` argument of the `take` command. It will open a browser where you'll be able to log into some plateform you want to take screenshot of. Particularly, you need to do so for Facebook and Twitter. The folder may need to be updated after a certain amount of time, or if you shut down your computer.
 
 ```usage: screenshot authenticate [-h] folder
 
@@ -39,7 +39,7 @@ optional arguments:
 
 ## Take
 
-```usage: screenshot take [-h] [--output OUTPUT] [--authenticate_folder AUTHENTICATE_FOLDER] [--cookies] column [file] output_dir
+```usage: screenshot take [-h] [--output OUTPUT] [--authenticate_folder AUTHENTICATE_FOLDER] [--cookies] [--throttle] column [file] output_dir
 
 positional arguments:
   column                column where the urls are or a single url
@@ -54,4 +54,6 @@ optional arguments:
                         authenticate_folder where the browser info are (useful for Facebook, Twitter...). Not compatible with
                         'cookie'
   --cookies, -c         get cookies from chrome (won't work for Facebook, Twitter). Not compatible with 'authenticate_folder'
+  --throttle THROTTLE, -t THROTTLE
+                        time to wait (ms) between accessing to an other URL. Defaults to 0
 ```

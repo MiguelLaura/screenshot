@@ -39,6 +39,7 @@ def main():
     take.add_argument("--output", "-o", help="output file with the files name")
     take.add_argument("--authenticate_folder", "-a", default=None, help="authenticate_folder where the browser info are (useful for Facebook, Twitter...). Not compatible with 'cookie'")
     take.add_argument("--cookies", "-c", action="store_true", help="get cookies from chrome (won't work for Facebook, Twitter). Not compatible with 'authenticate_folder'")
+    take.add_argument("--throttle", "-t", default=0, type=int, help="time to wait between accessing to an other URL. Defaults to 0")
 
     cli_args = parser.parse_args()
 
