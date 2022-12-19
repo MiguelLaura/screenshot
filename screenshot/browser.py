@@ -41,7 +41,7 @@ class BrowserContext(object):
         page = context.new_page()
         stealth_sync(page)
         page.goto(url)
-        page.wait_for_timeout(500)
+        page.wait_for_timeout(3000)
 
         name_screenshot_file = md5(url)
 

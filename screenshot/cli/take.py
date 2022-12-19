@@ -11,11 +11,13 @@ import casanova
 from io import StringIO
 from casanova.utils import CsvCellIO
 from playwright.sync_api import Error as PlaywrightError
+from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 
 from screenshot.browser import BrowserContext
 from screenshot.__version__ import __version__
+from screenshot.cli.reporters import report_error
 from screenshot.cli.utils import LoadingBarWithError
-from screenshot.exceptions import InvalidArgumentError
+from screenshot.cli.exceptions import InvalidArgumentError
 from screenshot.browser_authenticate import BrowserContextPersistent
 
 
@@ -62,32 +64,23 @@ def take_command(cli_args):
 
     loading_bar = LoadingBarWithError("Retrieving screenshots", unit="url")
 
+    browser_class = BrowserContext
+    class_argument = cookies
+
     if authenticate_folder:
-        with BrowserContextPersistent(authenticate_folder) as browser_screenshot:
-            for row, url in enricher.cells(column, with_rows=True):
+        browser_class = BrowserContextPersistent
+        class_argument = authenticate_folder
 
-                try:
-                    name_screenshot_file = browser_screenshot.screenshot_url(url, output_dir)
-                    enricher.writerow(row, [name_screenshot_file, None])
-                except (PlaywrightError, ValueError) as e:
-                    loading_bar.update_errors()
-                    loading_bar.print(e)
-                    enricher.writerow(row, [None, e])
+    with browser_class(class_argument) as browser_screenshot:
+        for row, url in enricher.cells(column, with_rows=True):
 
-                loading_bar.update()
-                time.sleep(throttle)
+            try:
+                name_screenshot_file = browser_screenshot.screenshot_url(url, output_dir)
+                enricher.writerow(row, [name_screenshot_file, None])
+            except (PlaywrightError, PlaywrightTimeoutError, ValueError) as e:
+                loading_bar.update_errors()
+                loading_bar.print("%s: %s" % (report_error(e), url))
+                enricher.writerow(row, [None, report_error(e)])
 
-    else:
-        with BrowserContext(cookies) as browser_screenshot:
-            for row, url in enricher.cells(column, with_rows=True):
-
-                try:
-                    name_screenshot_file = browser_screenshot.screenshot_url(url, output_dir)
-                    enricher.writerow(row, [name_screenshot_file, None])
-                except (PlaywrightError, ValueError) as e:
-                    loading_bar.update_errors()
-                    loading_bar.print(e)
-                    enricher.writerow(row, [None, e])
-
-                loading_bar.update()
-                time.sleep(throttle)
+            loading_bar.update()
+            time.sleep(throttle)

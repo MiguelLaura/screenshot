@@ -26,9 +26,9 @@ class BrowserContextPersistent(object):
         self.playwright.stop()
 
     def screenshot_url(self, url, output_dir):
-        page = self.browser.pages[0]
+        page = self.browser.new_page()
         page.goto(url)
-        page.wait_for_timeout(500)
+        page.wait_for_timeout(3000)
 
         name_screenshot_file = md5(url)
 

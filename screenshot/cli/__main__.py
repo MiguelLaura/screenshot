@@ -5,11 +5,6 @@
 #
 # CLI enpoint of the Screenshot library.
 #
-# To add:
-#   better error handling for urls
-#   add column in output file with errors
-#   resume option
-#
 import sys
 import csv
 import ctypes
