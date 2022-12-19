@@ -41,7 +41,7 @@ optional arguments:
 
 ## Take
 
-For now, with the option --authenticate, this command works with a headed browser.
+For now, with the option `--authenticate`, this command works with a headed browser.
 
 ```
 usage: python -m screenshot.cli take [-h] [--output OUTPUT] [--authenticate_folder AUTHENTICATE_FOLDER] [--cookies] [--throttle] column [file] output_dir
