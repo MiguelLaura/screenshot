@@ -18,7 +18,7 @@ class BrowserContextPersistent(object):
 
     def __enter__(self):
         self.playwright = sync_playwright().start()
-        self.browser = self.playwright.chromium.launch_persistent_context(self.authenticate_folder, channel="chrome")
+        self.browser = self.playwright.chromium.launch_persistent_context(self.authenticate_folder, channel="chrome", headless=False)
         return self
 
     def __exit__(self, exc_type, exc, tb):
@@ -26,7 +26,7 @@ class BrowserContextPersistent(object):
         self.playwright.stop()
 
     def screenshot_url(self, url, output_dir):
-        page = self.browser.new_page()
+        page = self.browser.pages[0]
         page.goto(url)
         page.wait_for_timeout(500)
 

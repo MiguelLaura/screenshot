@@ -27,7 +27,7 @@ optional arguments:
 
 ## Authenticate
 
-This command is useful if you want to use the `--authenticate-folder` argument of the `take` command. It will open a browser where you'll be able to log into some plateform you want to take screenshot of. Particularly, you need to do so for Facebook and Twitter. The folder may need to be updated after a certain amount of time, or if you shut down your computer.
+This command is useful if you want to use the `--authenticate-folder` argument of the `take` command. It will open a browser where you'll be able to log into some plateform you want to take screenshot of. Particularly, you need to do so for Facebook and Twitter.
 
 ```
 usage: python -m screenshot.cli authenticate [-h] folder
@@ -40,6 +40,8 @@ optional arguments:
 ```
 
 ## Take
+
+For now, this command doesn't work with a headless browser.
 
 ```
 usage: python -m screenshot.cli take [-h] [--output OUTPUT] [--authenticate_folder AUTHENTICATE_FOLDER] [--cookies] [--throttle] column [file] output_dir

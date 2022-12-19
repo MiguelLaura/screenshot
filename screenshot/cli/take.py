@@ -55,7 +55,7 @@ def ckeck_args(cli_args):
 def take_command(cli_args):
     column, input_file, output_dir, output, authenticate_folder, cookies, throttle = ckeck_args(cli_args)
 
-    enricher = casanova.enricher(input_file, output, add=["file_name"])
+    enricher = casanova.enricher(input_file, output, add=["file_name", "error"])
 
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -68,10 +68,11 @@ def take_command(cli_args):
 
                 try:
                     name_screenshot_file = browser_screenshot.screenshot_url(url, output_dir)
-                    enricher.writerow(row, [name_screenshot_file])
+                    enricher.writerow(row, [name_screenshot_file, None])
                 except (PlaywrightError, ValueError) as e:
                     loading_bar.update_errors()
-                    loading_bar.print(e.message)
+                    loading_bar.print(e)
+                    enricher.writerow(row, [None, e])
 
                 loading_bar.update()
                 time.sleep(throttle)
@@ -82,10 +83,11 @@ def take_command(cli_args):
 
                 try:
                     name_screenshot_file = browser_screenshot.screenshot_url(url, output_dir)
-                    enricher.writerow(row, [name_screenshot_file])
+                    enricher.writerow(row, [name_screenshot_file, None])
                 except (PlaywrightError, ValueError) as e:
                     loading_bar.update_errors()
                     loading_bar.print(e)
+                    enricher.writerow(row, [None, e])
 
                 loading_bar.update()
                 time.sleep(throttle)

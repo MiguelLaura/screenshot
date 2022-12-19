@@ -1,4 +1,8 @@
-url,source,file_name
-https://fr.wikipedia.org/wiki/Tas_(informatique),wikipedia,bc0a5a10243c89be6e100165c4c79484
-https://fr.wiktionary.org/wiki/t%C3%AAts,wiktionary,7c20752e5203036f55e6b466481ecbe7
-https://www.lemonde.fr/international/article/2022/11/21/ukraine-dans-le-donbass-les-habitants-de-bakhmout-face-au-deluge-de-feu-de-l-artillerie-russe_6150827_3210.html,lemonde,5e303e6819412023af24020ccf923aea
+url,source,file_name,error
+https://fr.wikipedia.org/wiki/Tas_(informatique),wikipedia,bc0a5a10243c89be6e100165c4c79484,
+https://fr.wiktionary.org/wiki/t%C3%AAts,wiktionary,7c20752e5203036f55e6b466481ecbe7,
+fghjk,yi,,"Protocol error (Page.navigate): Cannot navigate to invalid URL
+=========================== logs ===========================
+navigating to ""fghjk"", waiting until ""load""
+============================================================"
+https://www.lemonde.fr/international/article/2022/11/21/ukraine-dans-le-donbass-les-habitants-de-bakhmout-face-au-deluge-de-feu-de-l-artillerie-russe_6150827_3210.html,lemonde,5e303e6819412023af24020ccf923aea,
