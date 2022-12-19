@@ -30,7 +30,7 @@ class BrowserContext(object):
         self.browser.close()
         self.playwright.stop()
 
-    def screenshot_url(self, url, output_dir):
+    def screenshot_url(self, url, directory):
         context = self.browser.new_context()
 
         if self.cookies:
@@ -45,7 +45,7 @@ class BrowserContext(object):
 
         name_screenshot_file = md5(url)
 
-        page.screenshot(path="%s/%s.png" % (output_dir, name_screenshot_file), full_page=True)
+        page.screenshot(path="%s/%s.png" % (directory, name_screenshot_file), full_page=True)
 
         page.close()
         context.close()

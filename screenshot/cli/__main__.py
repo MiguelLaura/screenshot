@@ -26,13 +26,13 @@ def main():
     authenticate = subparsers.add_parser("authenticate", help="authenticate in a browser and save browser info in a authenticate_folder")
     authenticate.add_argument("folder", help="folder name where the browser info must be saved")
 
-    take = subparsers.add_parser("take", help="Take screenshot")
+    take = subparsers.add_parser("take", help="take screenshot")
     take.add_argument("column", help="column where the urls are or a single url")
-    take.add_argument("file", nargs="?", default=None, help="file where the urls are.  Defaults to None.")
-    take.add_argument("output_dir", help="name of the directory where we should put the screenshots")
+    take.add_argument("file", nargs="?", default=None, help="file where the urls are. Defaults to None.")
+    take.add_argument("directory", help="name of the directory where we should put the screenshots")
     take.add_argument("--output", "-o", help="output file with the files name")
-    take.add_argument("--authenticate_folder", "-a", default=None, help="authenticate_folder where the browser info are (useful for Facebook, Twitter...). Not compatible with 'cookie'")
-    take.add_argument("--cookies", "-c", action="store_true", help="get cookies from chrome (won't work for Facebook, Twitter). Not compatible with 'authenticate_folder'")
+    take.add_argument("--authenticate", "-a", default=None, help="authenticate_folder where the browser info are (useful for Facebook, Twitter...). Not compatible with 'cookies'")
+    take.add_argument("--cookies", "-c", action="store_true", help="get cookies from chrome (won't work for Facebook, Twitter). Not compatible with 'authenticate'")
     take.add_argument("--throttle", "-t", default=0, type=int, help="time to wait between accessing to an other URL. Defaults to 0")
 
     cli_args = parser.parse_args()
