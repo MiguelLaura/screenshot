@@ -25,23 +25,9 @@ optional arguments:
   --version            show program's version number and exit
 ```
 
-## Authenticate
-
-This command is useful if you want to use the `--authenticate` argument of the `take` command. It will open a browser where you'll be able to log into some plateform you want to take screenshot of. Particularly, you need to do so for Facebook and Twitter.
-
-```
-usage: python -m screenshot.cli authenticate [-h] folder
-
-positional arguments:
-  folder      folder name where the browser info must be saved
-
-optional arguments:
-  -h, --help  show this help message and exit
-```
-
 ## Take
 
-For now, with the option `--authenticate`, this command works with a headed browser.
+For now, with the option `--authenticate`, this command works with a headed browser. To create an `authenticate_folder`, you can use the `authenticate` command (documentation below).
 
 ```
 usage: python -m screenshot.cli take [-h] [--output OUTPUT] [--authenticate AUTHENTICATE] [--cookies] [--throttle] column [file] directory
@@ -61,4 +47,18 @@ optional arguments:
   --cookies, -c         get cookies from chrome (won't work for Facebook, Twitter). Not compatible with 'authenticate'
   --throttle THROTTLE, -t THROTTLE
                         time to wait between accessing to an other URL. Defaults to 0
+```
+
+## Authenticate
+
+This command is useful if you want to use the `--authenticate` argument of the `take` command. It will open a browser where you'll be able to log into some plateform you want to take screenshot of. This command is here as a result of experimentations, if you want to be connected to some accounts, we advise you to connect in your browser and use the `--cookies` option of the `take` command.
+
+```
+usage: python -m screenshot.cli authenticate [-h] folder
+
+positional arguments:
+  folder      folder name where the browser info must be saved
+
+optional arguments:
+  -h, --help  show this help message and exit
 ```

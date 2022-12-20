@@ -9,7 +9,7 @@ from minet.web import CookieResolver
 from playwright_stealth import stealth_sync
 from playwright.sync_api import sync_playwright
 
-from screenshot.utils import md5, formatted_cookie
+from screenshot.utils import md5
 
 
 class BrowserContext(object):
@@ -22,7 +22,20 @@ class BrowserContext(object):
     def __enter__(self):
         self.playwright = sync_playwright().start()
         if self.cookies:
-            self.cookies = CookieResolver(browser_cookie3.chrome())
+            self.cookies = []
+            jar = getattr(browser_cookie3, "chrome")()
+            for cookie in jar:
+                self.cookies.append(
+                    {
+                        "domain": cookie.domain,
+                        "name": cookie.name,
+                        "value": cookie.value,
+                        "path": cookie.path,
+                        "secure": True if cookie.secure else False,
+                        "expires": cookie.expires,
+                        "is_expired": True if cookie.is_expired else False,
+                    }
+                )
         self.browser = self.playwright.chromium.launch(channel="chrome")
         return self
 
@@ -34,9 +47,7 @@ class BrowserContext(object):
         context = self.browser.new_context()
 
         if self.cookies:
-            cookie = self.cookies(url)
-            playwright_cookie = formatted_cookie(cookie, url)
-            context.add_cookies(playwright_cookie)
+            context.add_cookies(self.cookies)
 
         page = context.new_page()
         stealth_sync(page)
