@@ -4,9 +4,13 @@ A python tool to take screenshots of web pages from list of urls.
 
 ## How to install it
 
-You need to clone the repository on your computer. Then, in your shell, type:
+You need to set a python environment. Then, in your shell, type:
 
- ```make deps```
+ ```
+ git clone git@github.com:MiguelLaura/screenshot.git
+ cd screenshot
+ make deps
+ ```
 
 You also need to have `chrome` installed on your computer.
 
@@ -27,7 +31,7 @@ optional arguments:
 
 ## Take
 
-For now, with the option `--authenticate`, this command works with a headed browser. To create an `authenticate_folder`, you can use the `authenticate` command (documentation below).
+For now, with the option `--authenticate`, this command works with a headed browser. To create an `authenticate_folder`, you can use the `authenticate` command (documentation below). If you want to be connected to some accounts, we advise you to connect in your browser and use the `--cookies` option.
 
 ```
 usage: python -m screenshot.cli take [-h] [--output OUTPUT] [--authenticate AUTHENTICATE] [--cookies] [--throttle] column [file] directory
@@ -51,7 +55,7 @@ optional arguments:
 
 ## Authenticate
 
-This command is useful if you want to use the `--authenticate` argument of the `take` command. It will open a browser where you'll be able to log into some plateform you want to take screenshot of. This command is here as a result of experimentations, if you want to be connected to some accounts, we advise you to connect in your browser and use the `--cookies` option of the `take` command.
+This command is useful if you want to use the `--authenticate` argument of the `take` command. It will open a browser where you'll be able to log into some plateform you want to take screenshot of. This command is here as a result of experimentations.
 
 ```
 usage: python -m screenshot.cli authenticate [-h] folder
