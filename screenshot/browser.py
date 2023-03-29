@@ -5,7 +5,6 @@
 # Class to instantiate browser, use it and properly close it
 #
 import browser_cookie3
-from minet.web import CookieResolver
 from playwright_stealth import stealth_sync
 from playwright.sync_api import sync_playwright
 

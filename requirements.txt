@@ -2,8 +2,6 @@
 importchecker==2.0
 pycodestyle==2.4.0
 pytest==6.1.0
-twine
-wheel
 
 # Dependencies
 browser-cookie3==0.16.2
